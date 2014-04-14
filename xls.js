@@ -4822,6 +4822,10 @@ function parse_workbook(blob, options) {
 	function addline(cell, line, options) {
 		lastcell = cell;
 		last_cell = encode_cell(cell);
+		if(range.s && cell.r < range.s.r) range.s.r = cell.r;
+		if(range.s && cell.c < range.s.c) range.s.c = cell.c;
+		if(range.e && cell.r > range.e.r) range.e.r = cell.r;
+		if(range.e && cell.c > range.e.c) range.e.c = cell.c;
 		if(options.sheetRows && lastcell.r >= options.sheetRows) cell_valid = false;
 		else out[last_cell] = line;
 	}
